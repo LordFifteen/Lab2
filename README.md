@@ -9,7 +9,7 @@
 тесты на Python с использованием `pytest` и оценивать покрытие кода тестами.
 
 ## Структура проекта
--calculator.py # Модуль «Калькулятор комиссий»
--test_calculator.py # Модульные тесты
--requirements.txt # Зависимости проекта
--README.md # Документация
+- calculator.py # Модуль «Калькулятор комиссий»
+- test_calculator.py # Модульные тесты
+- requirements.txt # Зависимости проекта
+- README.md # Документация
