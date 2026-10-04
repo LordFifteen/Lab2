@@ -5,6 +5,7 @@ import pytest
 from calculator import calculate_commission
 
 
+# Часть 2: базовые сценарии
 @pytest.mark.parametrize("amount, expected", [
     (100, 50.0),
     (1000, 50.0),
@@ -13,7 +14,7 @@ from calculator import calculate_commission
     (20001, 400.01),
     (40000, 600.0),
     (40001, 500.0),
-    (50000, 500.0),
+    (50000, 500.0),   # часть 4 переопределяет правило для >40 000
 ])
 def test_commission(amount, expected):
     assert calculate_commission(amount) == expected
@@ -29,3 +30,19 @@ def test_invalid_amount(amount):
 def test_not_a_number(amount):
     with pytest.raises(TypeError):
         calculate_commission(amount)
+
+
+# Часть 4: новая функциональность
+@pytest.mark.parametrize("amount, expected", [
+    (40001, 500.0),
+    (45000, 500.0),
+    (50000, 500.0),
+])
+def test_fixed_commission_over_40000(amount, expected):
+    """Свыше 40 000 руб. — фиксированная комиссия 500 руб."""
+    assert calculate_commission(amount) == expected
+
+
+def test_boundary_40000_still_percent():
+    """Ровно 40 000 — ещё по правилу 200 + 1%."""
+    assert calculate_commission(40000) == 600.0
